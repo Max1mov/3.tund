@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>page title</title>
+	<title>Page title</title>
 </head>
 <body>
-<?php reguire_once("menu.php"); ?>
+<?php require_once("menu.php"); ?>
