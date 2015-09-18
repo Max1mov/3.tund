@@ -1,8 +1,6 @@
 <?php
-	
 	$page_title = "AVALEHT";
 	$file_name = "home.php";
-
 ?>
 
 
