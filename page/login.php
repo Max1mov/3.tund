@@ -26,29 +26,36 @@
 		
 			//CREATE NUPP ======================================================================
 			
-			// kas e-post on tühi
+			// kas NIMI on tühi
 			if( empty($_POST["name"]) ) {
 				
 				// jah oli tühi
 				$name_error = "on vaja";
-				
 			}
-			
+			//mnogo error, error net.
+			if($name_error = ""){
+				echo "salvestan abi ".$name;
+			}	
 		}
 ?>
+
+
 <?php
 	$page_title = "logi sisse";
 	$file_name = "login.php";
 ?>
+
+
+
 <?php require_once("../header.php"); ?>
-	<h2>Log in</h2>
+		<h2>Log in</h2>
 		<form action="login.php" method="post" >
 			<input name="email" type="email" placeholder="E-post"> <?php echo $email_error; ?><br><br>
 			<input name="password" type="password" placeholder="Parool"> <?php echo $password_error; ?> <br><br>
 			<input type="submit" value="Log in">
 		</form> 
 	
-	<h2>Create user</h2>
+		<h2>Create user</h2>
 		<form action="login.php" method="post">
 			<input name="name" type="text" placeholder="eesnimi" > <?php echo $name_error; ?><br><br>
 			<input name="create" type="submit" value="create user" > <br><br>
