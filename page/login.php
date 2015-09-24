@@ -6,7 +6,8 @@
 	$email_error = "";
 	$password_error = "";
 	$name_error = "";
-	$login_error = "";
+	$reglog_error = "";
+	$lastname_error = "";
 	
 	// kontrollime et keegi vajutas input nuppu
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -14,10 +15,9 @@
 		//echo "ktonibuty nazhimal knopku";
 		//CREATE LOG ===========================================================================
 		//proverka pochty pustoy ili net
-		if ( empty($_POST["email"]) ) {
-			$email_error = "on vaja";
+		if (empty($_POST["email"])) {
+			$email_error = "e-mail is required";
 		}
-		
 		//proverka porolya, pustoi ili net
 		if ( empty($_POST["password"])) {
 			$password_error = "on vaja";
@@ -27,12 +27,20 @@
 		
 			//CREATE NUPP ======================================================================
 			
-			// kas NIMI on tühi
-			if( empty($_POST["name"]) ) {
-				
+				// kas NIMI on tühi
+				if( empty($_POST["name"]) ) {
 				// jah oli tühi
 				$name_error = "on vaja";
 			}
+					if( empty($_POST["lastname"]) ) {
+					// jah oli tühi
+					$lastname_error = "on vaja";
+			}
+						if( empty($_POST["login"]) ) {
+						// jah oli tühi
+						$reglog_error = "on vaja";
+			}
+			
 			//mnogo error, error net.
 			if($name_error = ""){
 				echo "salvestan abi ".$name;
@@ -59,10 +67,13 @@
 		<h2>Create user</h2>
 		<form action="login.php" method="post">
 			<input name="name" type="text" placeholder="eesnimi" > <?php echo $name_error; ?><br><br>
-			<input name="second name" type="text" placeholder="perekonnanim" > <?php echo $name_error; ?><br><br>
-			<input name="login" type="login" placeholder="login" > <?php echo $login_error; ?><br><br>
-			<input name="password" type="password" placeholder="pass" > <?php echo $password_error; ?><br><br>
+			<input name="lastname" type="text" placeholder="perekonnanim" > <?php echo $lastname_error; ?><br><br>
+			<input name="reglog" type="text" placeholder="login" > <?php echo $reglog_error; ?><br><br>
+			<input name="password" type="password" placeholder="passi" > <?php echo $password_error; ?><br><br>
 			<input name="email" type="email" placeholder="email" > <?php echo $email_error; ?><br><br>
 			<input name="create" type="submit" value="create user" > <br><br>
+			<textarea name="comment" rows="5" cols="40"></textarea>
+			kas teil meeldib?<input type="radio" name="gender" value="female">jah	
+			<input type="radio" name="gender" value="male">Ei
 		</form>
 <?php require_once("../footer.php"); ?>
