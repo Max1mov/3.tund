@@ -7,13 +7,10 @@
 	// LOGIN.PHP
 	
 	// errori muutujad peavad igal juhul olemas olema 
-	$email_error = "";
-	$password_error = "";
-	$regname_error = "";
-	$reglog_error = "";
-	$lastname_error = "";
-	$regpassword_error = "";
-	$regemail_error = "";
+	$email_error = $password_error = $regname_error = $reglog_error = $lastname_error = $regpassword_error = $regemail_error = "";
+	
+	$email = $regemail = "";
+	$password = $regpassword = "";
 	
 	// kontrollime et keegi vajutas input nuppu
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -24,14 +21,25 @@
 		//proverka pochty pustoy ili net
 		if (empty($_POST["email"])) {
 			$email_error = "e-mail is required";
+		}else{
+			 $email = test_input($_POST["email"]);
+			// check if e-mail address is well-formed
+			if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+			$emailErr = "Invalid email format"; 
+		}
 		}
 		
-
 		//proverka porolya, pustoi ili net
 		if ( empty($_POST["password"])) {
 			$password_error = "password is required";
-		} 
-		} 		
+		}else{
+				$password = test_input($_POST["password"]);
+				// check if pass only contains letters and whitespace
+				if (!preg_match("/^[a-zA-Z ]*$/",$password)) {
+				$password = "Only letters and white space allowed"; 
+		}
+  }
+ 		}
 		}
 		
 			 if(isset($_POST["create"])){
@@ -63,11 +71,17 @@
 				// reg pass on tühi
 				$regemail_error = "email is required";
 			}
-			//mnogo error, error net.
-			if($name_error = ""){
-				echo "salvestan abi ".$name;
+				
 			}	
-		}
+		
+		
+		
+	function test_input($data) {
+      $data = trim($data);
+      $data = stripslashes($data);
+      $data = htmlspecialchars($data);
+      return $data;
+    }
 ?>
 
 
@@ -93,6 +107,7 @@
 			<input name="reglog" type="text" placeholder="login" > <?php echo $reglog_error; ?><br><br>
 			<input name="regpassword" type="password" placeholder="passi" > <?php echo $regpassword_error; ?><br><br>
 			<input name="regemail" type="email" placeholder="email" > <?php echo $regemail_error; ?><br><br>
+			IF YOU WANT TO COMMENT THIS SITE, SO TRY IT <br><br>
 			<textarea name="comment" rows="5" cols="40"></textarea><br><br>
 			kas teil meeldib?<input type="radio" name="gender" value="female">Jah
 			<input type="radio" name="gender" value="male">Ei <br><br>
