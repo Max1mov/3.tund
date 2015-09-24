@@ -9,7 +9,7 @@
 	// errori muutujad peavad igal juhul olemas olema 
 	$email_error = "";
 	$password_error = "";
-	$name_error = "";
+	$regname_error = "";
 	$reglog_error = "";
 	$lastname_error = "";
 	$regpassword_error = "";
@@ -17,6 +17,7 @@
 	
 	// kontrollime et keegi vajutas input nuppu
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
+		if(isset($_POST["login"])){
 		
 		//echo "ktonibuty nazhimal knopku";
 		//CREATE LOG ===========================================================================
@@ -24,11 +25,14 @@
 		if (empty($_POST["email"])) {
 			$email_error = "e-mail is required";
 		}
-  }
+		
+
 		//proverka porolya, pustoi ili net
 		if ( empty($_POST["password"])) {
 			$password_error = "password is required";
 		} 
+		} 		
+		}
 		
 			 if(isset($_POST["create"])){
 		
@@ -39,17 +43,25 @@
 				// registre name on tühi
 				$name_error = "Name is required";
 			}
-					if( empty($_POST["lastname"]) ) {
-					// lastname on tühi
-					$lastname_error = "perekonnanimi is required";
+				if( empty($_POST["lastname"]) ) {
+				// lastname on tühi
+				$lastname_error = "perekonnanimi is required";
 			}
-						if( empty($_POST["login"]) ) {
-						// login on tühi
-						$reglog_error = "login is required";
+				if( empty($_POST["login"]) ) {
+				// login on tühi
+				$reglog_error = "login is required";
 			}
-							if( empty($_POST["regpassword"]) ) {
-							// reg pass on tühi
-							$regpassword_error = "password is required";
+				if( empty($_POST["regpassword"]) ) {
+				// reg pass on tühi
+				$regpassword_error = "password is required";
+			}
+				if( empty($_POST["regname"]) ) {
+				// reg pass on tühi
+				$regname_error = "name is required";
+			}
+				if( empty($_POST["regemail"]) ) {
+				// reg pass on tühi
+				$regemail_error = "email is required";
 			}
 			//mnogo error, error net.
 			if($name_error = ""){
@@ -71,19 +83,20 @@
 		<form action="login.php" method="post" >
 			<input name="email" type="email" placeholder="E-post"> <?php echo $email_error; ?><br><br>
 			<input name="password" type="password" placeholder="Parool"> <?php echo $password_error; ?> <br><br>
-			<input type="submit" value="Log in">
+			<input name="login" type="submit" value="Login">
 		</form> 
 	
 		<h2>Create user</h2>
 		<form action="login.php" method="post">
-			<input name="name" type="text" placeholder="eesnimi" > <?php echo $name_error; ?><br><br>
+			<input name="regname" type="text" placeholder="eesnimi" > <?php echo $regname_error; ?><br><br>
 			<input name="lastname" type="text" placeholder="perekonnanim" > <?php echo $lastname_error; ?><br><br>
 			<input name="reglog" type="text" placeholder="login" > <?php echo $reglog_error; ?><br><br>
 			<input name="regpassword" type="password" placeholder="passi" > <?php echo $regpassword_error; ?><br><br>
 			<input name="regemail" type="email" placeholder="email" > <?php echo $regemail_error; ?><br><br>
+			<textarea name="comment" rows="5" cols="40"></textarea><br><br>
+			kas teil meeldib?<input type="radio" name="gender" value="female">Jah
+			<input type="radio" name="gender" value="male">Ei <br><br>
 			<input name="create" type="submit" value="create user" > <br><br>
-			<textarea name="comment" rows="5" cols="40"></textarea>
-			kas teil meeldib?<input type="radio" name="gender" value="female">jah	
-			<input type="radio" name="gender" value="male">Ei
+			
 		</form>
 <?php require_once("../footer.php"); ?>
