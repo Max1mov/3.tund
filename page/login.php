@@ -6,6 +6,7 @@
 	$email_error = "";
 	$password_error = "";
 	$name_error = "";
+	$login_error = "";
 	
 	// kontrollime et keegi vajutas input nuppu
 	if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -58,6 +59,10 @@
 		<h2>Create user</h2>
 		<form action="login.php" method="post">
 			<input name="name" type="text" placeholder="eesnimi" > <?php echo $name_error; ?><br><br>
+			<input name="second name" type="text" placeholder="perekonnanim" > <?php echo $name_error; ?><br><br>
+			<input name="login" type="login" placeholder="login" > <?php echo $login_error; ?><br><br>
+			<input name="password" type="password" placeholder="pass" > <?php echo $password_error; ?><br><br>
+			<input name="email" type="email" placeholder="email" > <?php echo $email_error; ?><br><br>
 			<input name="create" type="submit" value="create user" > <br><br>
 		</form>
 <?php require_once("../footer.php"); ?>
